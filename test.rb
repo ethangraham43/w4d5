@@ -39,15 +39,16 @@ end
 # p largest_contiguous_subsum(list) 
 
 def largest_contiguous_subsum(array)
-    largest = 0
-    (0...array.length).each do |i|
-       current_1 = array[i..-1]
-       current_2 = array[0..i]
-       
-       largest = current_2.sum if current_2.sum > largest
-       largest = current_1.sum if current_1.sum > largest
+    largest = array.first
+    current = 0
+    array.each do |num|
+        if num < 0
+            current = 0    
+        end
+        current += num
+        largest = current if largest < current 
     end
     largest
 end
-list = [5, 3, -7]
+list = [5, 3, -7, 1]
 p largest_contiguous_subsum(list) 
